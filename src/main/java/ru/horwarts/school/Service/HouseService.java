@@ -3,6 +3,8 @@ package ru.horwarts.school.Service;
 import org.springframework.stereotype.Service;
 import ru.horwarts.school.Model.Faculty;
 import ru.horwarts.school.Model.Student;
+import ru.horwarts.school.repository.FacultyRepository;
+import ru.horwarts.school.repository.StudentRepository;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,46 +13,31 @@ import java.util.stream.Collectors;
 
 @Service
 public class HouseService {
-    private final HashMap<Long, Faculty> faculties = new HashMap<>();
-    private Long id= 0L;
+    private final FacultyRepository facultyRepository;
+
+    public HouseService(FacultyRepository facultyRepository) {
+        this.facultyRepository = facultyRepository;
+    }
 
     public void create (Faculty faculty){
-        if (!faculties.containsKey(faculty.getId())){
-            faculty.setId(++id);
-            faculties.put(faculty.getId(), faculty);
-        } else {
-         new RuntimeException();
-        }
-
+        facultyRepository.save(faculty);
     }
 
-    public Faculty getById (Long id){
-        if (faculties.containsKey(id)){
-            return faculties.get(id);
-        }
-        return null;
+    public Faculty getById (Long id) {
+        return facultyRepository.findById(id).get();
     }
 
-    public Collection<Faculty> getAll(){
-        return faculties.values();
+    public List<Faculty> getAll(){
+        return facultyRepository.findAll();
     }
 
     public Faculty edit(Faculty faculty){
-        if (faculties.containsKey(faculty.getId())){
-            return faculties.put(faculty.getId(), faculty);
-        }
-        return null;
+        return facultyRepository.save(faculty);
     }
-    public Faculty removeById(Long id){
-        if (faculties.containsKey(id)){
-            return faculties.remove(id);
-        }
-        return null;
+    public void removeById(Long id){
+        facultyRepository.deleteById(id);
     }
     public List<Faculty> filterByColor (String color){
-        return faculties.entrySet().stream()
-                .filter(f -> f.getValue().getColor().contains(color))
-                .map(f -> f.getValue())
-                .collect(Collectors.toList());
+        return facultyRepository.getFacultiesByColor(color);
     }
 }

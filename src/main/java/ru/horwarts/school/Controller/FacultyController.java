@@ -58,11 +58,8 @@ public class FacultyController {
     }
     @DeleteMapping("{id}")
     public ResponseEntity<Faculty> remove (@PathVariable Long id){
-        Faculty result = houseService.removeById(id);
-        if (result == null){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(result);
+        houseService.removeById(id);
+        return ResponseEntity.ok().build();
     }
     @GetMapping("filter/{color}")
     public ResponseEntity<List<Faculty>> filterByColor (@PathVariable String color){

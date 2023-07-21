@@ -59,8 +59,7 @@ public class StudentService {
     }
 
     public List<StudentDTO> getStudentsByFacultyId (Long facultyId){
-        List<Student> students = studentsRepository.findByFaculty(
-                facultyRepository.getById(facultyId));
+        List<Student> students = studentsRepository.getStudentsByFacultyId(facultyId);
         List<StudentDTO> dtos = new ArrayList<>();
         for (Student student:students) {
             dtos.add(new StudentDTO().fromStudent(student));

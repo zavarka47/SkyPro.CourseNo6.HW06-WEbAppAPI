@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import ru.horwarts.school.model.Student;
 
 import java.util.Objects;
-@Component
+
 public class StudentDTO {
 
     private Long studentId;

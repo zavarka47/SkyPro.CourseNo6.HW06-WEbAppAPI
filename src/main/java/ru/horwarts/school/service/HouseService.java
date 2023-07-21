@@ -8,6 +8,7 @@ import ru.horwarts.school.repository.StudentRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HouseService {
@@ -24,7 +25,8 @@ public class HouseService {
     }
 
     public FacultyDTO getById (Long id) {
-        return new FacultyDTO().fromFaculty(facultyRepository.findById(id).get());
+        Faculty byId = facultyRepository.findById(id).orElse(null);
+        return new FacultyDTO().fromFaculty(byId);
     }
 
     public List<FacultyDTO> getAll(){

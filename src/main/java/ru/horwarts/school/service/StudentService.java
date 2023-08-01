@@ -23,7 +23,7 @@ public class StudentService {
 
 
     public StudentDTO getById (Long id){
-        return new StudentDTO().fromStudent(studentsRepository.findById(id).get());
+        return studentsRepository.findById(id).map(s -> new StudentDTO().fromStudent(s)).orElse(null);
     }
 
     public List<StudentDTO> getAll(){
@@ -59,7 +59,7 @@ public class StudentService {
     }
 
     public List<StudentDTO> getStudentsByFacultyId (Long facultyId){
-        List<Student> students = studentsRepository.getStudentsByFacultyId(facultyId);
+        List<Student> students = studentsRepository.findAllByFaculty_FacultyId(facultyId);
         List<StudentDTO> dtos = new ArrayList<>();
         for (Student student:students) {
             dtos.add(new StudentDTO().fromStudent(student));

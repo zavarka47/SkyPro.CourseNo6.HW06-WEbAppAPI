@@ -25,8 +25,7 @@ public class HouseService {
     }
 
     public FacultyDTO getById (Long id) {
-        Faculty byId = facultyRepository.findById(id).orElse(null);
-        return new FacultyDTO().fromFaculty(byId);
+        return facultyRepository.findById(id).map(e -> new FacultyDTO().fromFaculty(e)).orElse(null);
     }
 
     public List<FacultyDTO> getAll(){

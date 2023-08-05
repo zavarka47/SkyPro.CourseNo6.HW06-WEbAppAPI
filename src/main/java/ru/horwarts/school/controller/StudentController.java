@@ -1,14 +1,10 @@
 package ru.horwarts.school.controller;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.horwarts.school.DTO.Avatar;
+import ru.horwarts.school.model.Avatar;
 import ru.horwarts.school.DTO.StudentDTO;
-import ru.horwarts.school.model.Student;
 import ru.horwarts.school.service.AvatarService;
 import ru.horwarts.school.service.StudentService;
 
@@ -49,8 +45,8 @@ public class StudentController {
         return ResponseEntity.ok(result);
     }
     @GetMapping
-    public ResponseEntity<Collection<StudentDTO>> getAll(){
-        Collection<StudentDTO> result = studentService.getAll();
+    public ResponseEntity<Collection<StudentDTO>> getAll(@RequestParam Integer pageNumber, @RequestParam Integer pageSize){
+        Collection<StudentDTO> result = studentService.getAll(pageNumber, pageSize);
         if (result == null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -131,4 +127,21 @@ public class StudentController {
              bis.transferTo(bos);
          }
     }
+
+   @GetMapping("/count")
+    public ResponseEntity getQuantityStudents(){
+        return ResponseEntity.ok(studentService.getQuantityStudents());
+    }
+
+    @GetMapping("/avg")
+    public ResponseEntity getAverageAgeStudents(){
+        return ResponseEntity.ok(studentService.getAverageAgeStudents());
+    }
+
+
+    @GetMapping("/youngest")
+    public ResponseEntity getYoungestStudents(){
+        return ResponseEntity.ok(studentService.getFiveYoungStudents());
+    }
+
 }

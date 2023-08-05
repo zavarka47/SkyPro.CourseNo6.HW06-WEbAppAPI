@@ -11,7 +11,7 @@ public class Faculty {
     private Long facultyId;
     private String facultyName;
     private String facultyColor;
-    @OneToMany (mappedBy = "faculty")
+    @OneToMany (mappedBy = "faculty", fetch = FetchType.LAZY)
     private List<Student> students;
 
     public Faculty() {

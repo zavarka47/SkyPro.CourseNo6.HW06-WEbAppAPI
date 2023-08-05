@@ -1,7 +1,7 @@
 package ru.horwarts.school.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.horwarts.school.DTO.Avatar;
+import ru.horwarts.school.model.Avatar;
 
 import java.util.Optional;
 

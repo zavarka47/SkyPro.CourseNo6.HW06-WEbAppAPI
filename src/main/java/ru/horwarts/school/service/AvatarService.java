@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import ru.horwarts.school.DTO.Avatar;
+import ru.horwarts.school.model.Avatar;
 import ru.horwarts.school.model.Student;
 import ru.horwarts.school.repository.AvatarRepository;
 import ru.horwarts.school.repository.StudentRepository;

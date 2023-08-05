@@ -1,5 +1,6 @@
 package ru.horwarts.school.service;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.horwarts.school.DTO.StudentDTO;
 import ru.horwarts.school.model.Student;
@@ -26,8 +27,12 @@ public class StudentService {
         return studentsRepository.findById(id).map(s -> new StudentDTO().fromStudent(s)).orElse(null);
     }
 
-    public List<StudentDTO> getAll(){
-        List <Student> students = studentsRepository.findAll();
+    public List<StudentDTO> getAll(Integer pageNumber, Integer pageSize){
+        if (pageSize>50 || pageSize<0){
+            pageSize = 50;
+        }
+        PageRequest pageRequest = PageRequest.of(pageNumber-1, pageSize);
+        List <Student> students = studentsRepository.findAll(pageRequest).getContent();
         List <StudentDTO> dtos = new ArrayList<>();
         for (Student student :students) {
             dtos.add(new StudentDTO().fromStudent(student));
@@ -74,6 +79,19 @@ public class StudentService {
         student.setFaculty(facultyRepository.getById(studentDTO.getFacultyId()));
         return student;
     }
+
+   public Integer getQuantityStudents(){
+        return studentsRepository.getQuantityStudent();
+    }
+
+    public Integer getAverageAgeStudents(){
+        return studentsRepository.getAverageAgeStudents();
+    }
+
+    public List<Student> getFiveYoungStudents(){
+        return studentsRepository.getFiveYoungStudent();
+    }
+
 
 
 }

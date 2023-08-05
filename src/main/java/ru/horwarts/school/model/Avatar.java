@@ -1,4 +1,4 @@
-package ru.horwarts.school.DTO;
+package ru.horwarts.school.model;
 
 import ru.horwarts.school.model.Student;
 

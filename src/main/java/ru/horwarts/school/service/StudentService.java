@@ -4,6 +4,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.horwarts.school.DTO.StudentDTO;
 import ru.horwarts.school.model.Student;
+import ru.horwarts.school.projections.StudentProjection;
 import ru.horwarts.school.repository.FacultyRepository;
 import ru.horwarts.school.repository.StudentRepository;
 
@@ -88,7 +89,7 @@ public class StudentService {
         return studentsRepository.getAverageAgeStudents();
     }
 
-    public List<Student> getFiveYoungStudents(){
+    public List<StudentProjection> getFiveYoungStudents(){
         return studentsRepository.getFiveYoungStudent();
     }
 

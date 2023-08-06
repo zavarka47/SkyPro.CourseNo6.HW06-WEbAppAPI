@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.horwarts.school.model.Avatar;
 import ru.horwarts.school.DTO.StudentDTO;
+import ru.horwarts.school.projections.StudentProjection;
 import ru.horwarts.school.service.AvatarService;
 import ru.horwarts.school.service.StudentService;
 
@@ -140,8 +141,7 @@ public class StudentController {
 
 
     @GetMapping("/youngest")
-    public ResponseEntity getYoungestStudents(){
-        return ResponseEntity.ok(studentService.getFiveYoungStudents());
+    public ResponseEntity getYoungestStudents(){ return ResponseEntity.ok(studentService.getFiveYoungStudents());
     }
 
 }

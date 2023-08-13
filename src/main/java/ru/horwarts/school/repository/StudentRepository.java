@@ -11,12 +11,7 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student, Long> {
 List<Student> findByStudentAge (Integer age);
 List<Student> findByStudentAgeBetween (Integer min, Integer max);
-//List<Student> findByFaculty (Faculty faculty);
-//@Query (value = "SELECT * FROM student WHERE faculty_id = faculty_id", nativeQuery = true)
-//List<Student> findAllByFaculty_FacultyId (@Param("faculty_id") Long faculty_id);
-
 List<Student> findAllByFaculty_FacultyId (Long facultyId);
-
 @Query (value = "SELECT COUNT (*) from student",nativeQuery = true)
 Integer getQuantityStudent ();
 @Query (value = "Select avg(student_age) from student", nativeQuery = true)

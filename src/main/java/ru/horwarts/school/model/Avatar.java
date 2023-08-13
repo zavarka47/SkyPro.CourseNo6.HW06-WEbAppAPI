@@ -15,6 +15,7 @@ public class Avatar {
     @Lob
     private byte [] date;
     @OneToOne
+    @JoinColumn (name = "studentId")
     //@JoinColumn (name = "studentId")
     private Student student;
 

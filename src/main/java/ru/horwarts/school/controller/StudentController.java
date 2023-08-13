@@ -9,6 +9,7 @@ import ru.horwarts.school.projections.StudentProjection;
 import ru.horwarts.school.service.AvatarService;
 import ru.horwarts.school.service.StudentService;
 
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.file.Files;
@@ -100,7 +101,7 @@ public class StudentController {
     }
 
     @GetMapping ("{id}/preview")
-    public ResponseEntity getPreview (@PathVariable Long id){
+    public ResponseEntity getPreview (@PathVariable Long id) {
         Avatar avatar = avatarService.findByStudentId(id);
 
         HttpHeaders headers = new HttpHeaders();
@@ -111,7 +112,8 @@ public class StudentController {
         return ResponseEntity.status(200).headers(headers).body(avatar.getDate());
     }
 
-    @GetMapping ("{id}/avatar")
+
+/*    @GetMapping ("{id}/avatar")
     public void getAvatar (@PathVariable Long id, HttpServletResponse response) throws IOException {
 
         Avatar avatar = avatarService.findByStudentId(id);
@@ -127,7 +129,7 @@ public class StudentController {
              response.setContentLength(Math.toIntExact(avatar.getFileSize()));
              bis.transferTo(bos);
          }
-    }
+    }*/
 
    @GetMapping("/count")
     public ResponseEntity getQuantityStudents(){
